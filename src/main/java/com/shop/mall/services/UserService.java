@@ -53,13 +53,10 @@ public class UserService {
     }
 
     public void delete(Long id){
-        try {
-            repository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new ResouceNotFoundException(e);
-        } catch (DataIntegrityViolationException e){
-            throw new DatabaseException(e.getMessage());
+        if (!repository.existsById(id)){
+            throw new ResouceNotFoundException("Resource not found!");
         }
+        repository.deleteById(id);
     }
 
 }
