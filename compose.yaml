@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres
+    container_name: psql-db-mall
+    restart: always
+    environment:
+      POSTGRES_DB: mall_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5432:5432"
+    networks:
+      - back-tier
+
+networks:
+  back-tier:
+    driver: bridge
